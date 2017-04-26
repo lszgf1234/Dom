@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div ng-controller="MyController" class="container">
+    <br/><br/>
+    <input type="text" ng-model="msg" ng-change="callNotify(msg)"/>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<!--<script src="/untitled1/view/services/factory.js"></script>-->
+<script>
+    angular.module('myApp',['App']).
+            controller('MyController', ['$scope', 'notify', function ($scope) {
+                $scope.callNotify = function(msg) {
+                    console.log(notify);
+                    notify(msg);
+                };
+            }]);
+    angular.module('App',[]).
+            factory('notify', ['$window', function(win) {
+                var msgs = [];
+                return function(msg) {
+                    alert(msg);
+                    msgs.push(msg);
+                    if (msgs.length == 3) {
+                        win.alert(msgs.join("\n"));
+                        msgs = [];
+                    }
+                };
+            }]);
+</script>
+</body>
+</html>

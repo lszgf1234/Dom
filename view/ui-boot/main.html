@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div ng-controller="myCtr" class="container">
+    <br/><br/><br/>
+    <!--<form >-->
+        <!--<h2>Which is your favorite?</h2>-->
+        <!--<label ng-repeat="name in names" for="{{name}}">-->
+            <!--{{name}}-->
+            <!--<input Type="radio"-->
+                   <!--ng-model="my.favorite"-->
+                   <!--ng-value="name"-->
+                   <!--id="{{name}}"-->
+                   <!--name="favorite">-->
+        <!--</label>-->
+        <!--<div>You chose {{my.favorite}}</div>-->
+    <!--</form>-->
+    <div class='form-group'>
+        <label>或者发送邀请链接</label>
+        <button id="shareMission" uib-popover-template="'shareMission.html'"  popover-trigger="show"   popover-placement="bottom" popover-title="应用设置" class='btn btn-block btn-success' ng-click="makeInvite()">获取链接</button>
+    </div>
+    <script type="text/ng-template" id="shareMission.html">
+        <div class="test">常显示</div>
+            <div class='form-group'>
+                <div class='help-block'>链接有效期30分钟</div>
+                <div class='form-control' style='height:auto;word-break:break-all'>{{inviteURL}}</div>
+            </div>
+            <div class='form-group'>
+                <button class='btn btn-default' ng-click="closeInvite()">关闭</button>
+            </div>
+    </script>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script src="/untitled1/js/ui-bootstrap-tpl.js"></script>
+<script>
+    angular.module('app', ['ui.bootstrap'])
+            .config(['$uibTooltipProvider',function($uibTooltipProvider){
+                $uibTooltipProvider.setTriggers({
+                    'show': 'hide'
+                });
+            }])
+            .controller('myCtr', function ($scope) {
+                var i = 0;
+                $scope.makeInvite = function() {
+//////                    http2.get('/rest/pl/fe/matter/mission/coworker/makeInvite?mission=' + $scope.mission.id, function(rsp) {
+                        var url = 'http://' + location.host;
+                        $scope.inviteURL = url;
+//                        if(i) return;
+//                        i++;
+                        $('#shareMission').trigger('show');
+//////                    });
+                };
+                $scope.closeInvite = function() {
+                    $scope.inviteURL = '';
+                    $('#shareMission').trigger('hide');
+                    i = 0 ;
+                };
+                $scope.names = ['pizza', 'unicorns', 'robots'];
+                $scope.my = { favorite: 'unicorns' };
+
+            })
+</script>
+</body>
+</html>

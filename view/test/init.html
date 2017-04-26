@@ -1,0 +1,34 @@
+<div class='container' ng-controller="ctrlHome">
+    <div class='row tms-panel' ng-if="site.home_carousel">
+        <div style="height: 305px" ng-controller="ctrlCarousel">
+            <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                <div uib-slide ng-repeat="slide in slides" index="$index">
+                    <img ng-src="{{slide.picUrl}}" style="height:305px;margin:auto;">
+                    <div class="carousel-caption"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <uib-tabset active="0">
+            <uib-tab index="$index" ng-repeat="c in channels">
+                <uib-tab-heading>{{c.title}}</uib-tab-heading>
+                <div class='list-group'>
+                    <div class='list-group-item' ng-repeat="m in c._matters" ng-click='openMatter(m)'>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" ng-src="{{m.pic}}">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{m.title}}</h4>
+                                <div>{{m.summary}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</div>

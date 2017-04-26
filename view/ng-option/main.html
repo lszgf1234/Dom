@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div ng-controller="myCtr">
+    <select ng-model="mycity" ng-options="city.id as city.name for city in Cities"></select>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script>
+    angular.module('app', [])
+            .controller('myCtr', function ($scope) {
+                $scope.mycity = 3;
+                $scope.Cities = [{ id: 1, name: '北京' }, { id: 2, name: '上海' }, { id: 3, name: '广州' }];
+            })
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+/*公共样式*/
+.clearfix:before,clearfix:after{content:””;display:table;}
+.clearfix:after{clear:both}
+.clearfix{*zoom:1;}/*兼容IE6、IE7*/
+/*公共样式 -end*/
+.test>:last-child{
+    border-bottom: 1px solid #dddddd;
+}
+.discussion{
+    border-top: 1px solid #dddddd;
+    /*padding-top: 1em;*/
+}
+.discussion>.left,.discussion>.right,.replay .left,.replay .right{
+    display: table-cell;
+    padding-top: 1em;
+}
+.discussion>.left{
+    background: #FBFBFD;
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
+
+}
+.discussion>.right{
+    /*background: #fff;*/
+    padding-left: 2em;
+    padding-bottom: 1em;
+    width: 100%;
+
+}
+
+.left .img{
+    margin: auto;
+}
+.img{
+    width: 100px;
+    height: 100px;
+    /*background: url(/untitled1/img/1DECD80DDF9828C466DC6F631028F7EC.jpg) ;*/
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #ddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 10px;;
+}
+.discussion>.right>.message{
+    min-height: 8.5em;
+}
+.right .replay{
+    background: #FBFBFD;
+    padding: 1em;
+}
+.replay .img{
+    width: 30px;
+    height: 30px;
+    border: 2px solid #ddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 4px;;
+}
+
+.replay .right{
+    padding-left: 1em;
+    padding-top: 1.5em;
+
+}
+.replay .talk{
+    margin: 1em 0;
+}
+.date{
+    text-align: right;
+}
+ textarea{
+    width: 100%;
+}
+ .publish{
+     margin: 2em 4em 0;
+ }

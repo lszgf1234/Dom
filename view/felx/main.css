@@ -1,0 +1,7 @@
+.thumbnail{
+    display: flex;
+    flex-direction:column
+}
+.thumbnail .summary{flex:1 0 1.5em;}
+.thumbnail .attr{display:flex;padding:.5em 0;}
+.thumbnail .creat_name{flex:1}

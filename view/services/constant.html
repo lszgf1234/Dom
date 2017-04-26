@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+</head>
+<body>
+<br/><br/>
+
+<div class="container">
+    <div ng-controller="myCtr" ></div>
+    <div ng-controller="myCtrData">{{data[0].test}}</div>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script>
+    var app = angular.module('app', []);
+    app.constant('data', [{
+        value: 'article',
+        title: '单图文',
+        url: 'rest'
+    }, {
+        value: 'article',
+        title: '多图文',
+        url: 'rest'
+    }]);
+    app.controller('myCtr', ['$scope', 'data',function ($scope, Data) {
+        Data[0].test = '添加属性';
+    }]);
+    app.controller('myCtrData', ['$scope', 'data',function ($scope, Data) {
+        console.log(Data);
+        $scope.data = Data;
+    }]);
+</script>
+</body>
+</html>

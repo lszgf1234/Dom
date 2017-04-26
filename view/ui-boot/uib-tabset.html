@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>uib-tabset</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+</head>
+<body>
+<br/><br/>
+
+<div ng-controller="myCtr" class="container">
+    <uib-tabset active="active" type="tabs">
+        <uib-tab index="0" heading="标签页1">内容1</uib-tab>
+        <uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active"
+                 disable="tab.disabled">
+            {{tab.content}}
+        </uib-tab>
+        <uib-tab index="3" select="alertMe()">
+            <uib-tab-heading>
+                <i class="glyphicon glyphicon-bell"></i> Alert!
+            </uib-tab-heading>
+            内容部分
+        </uib-tab>
+    </uib-tabset>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script src="/untitled1/js/ui-bootstrap-tpl.js"></script>
+<script>
+    angular.module('app', ['ui.bootstrap'])
+            .controller('myCtr', function ($scope) {
+                $scope.tabs = [
+                    {title: '标签页a', content: '标签页a的内容'},
+                    {title: '标签页b', content: '标签页b的内容', disabled: true}
+                ];
+
+                $scope.alertMe = function () {
+                    setTimeout(function () {
+                        $window.alert('clicked!');
+                    });
+                };
+            })
+</script>
+</body>
+</html>

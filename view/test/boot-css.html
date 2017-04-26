@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+</head>
+<body>
+<br/><br/>
+
+<div ng-controller="myCtr" class="container">
+    <div class="form-group">{{text}}
+        <button type="button" class="btn btn-default" ng-click="w()">打印</button>
+        <textarea class='form-control' rows='2' ng-model='text'></textarea>
+    </div>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script>
+    var app = angular.module('app', []);
+    app.controller('myCtr', ['$scope', function ($scope) {
+        $scope.w = function(){
+            console.log($scope.text);
+        };
+    }])
+</script>
+</body>
+</html>

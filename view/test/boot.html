@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div ng-controller="myCtr" >
+    <!--<nav class="navbar navbar-default">-->
+    <!--<div class="container-fluid">-->
+        <!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+        <!--<div class="navbar-header">-->
+            <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-21">-->
+                <!--<span class="sr-only">Toggle navigation</span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+            <!--</button>-->
+            <!--&lt;!&ndash;<a class="navbar-brand" href="#">Brand</a>&ndash;&gt;-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+        <!--<div class="collapse navbar-collapse" id="navbar-collapse-21">-->
+            <!--<ul class="nav navbar-nav">-->
+                <!--&lt;!&ndash;<li ng-init="type='log'"></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li ng-class="{active:type==='log'}"><a href="#" ng-click="type='log"></a>日志</li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li ng-class="{active:type==='favor'}"><a href="#" ng-click="type='favor">收藏</a></li>&ndash;&gt;-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script>
+    angular.module('app', [])
+            .controller('myCtr', function ($scope, $q) {
+                var RouteParam = function(name, loadjs) {
+                    var baseURL = '/views/default/pl/fe/site/setting/';
+                    this.templateUrl = baseURL + name + '.html?_=' + (new Date() * 1);
+                    this.controller = 'ctrl' + name[0].toUpperCase() + name.substr(1);
+                    if (loadjs) {
+                        this.resolve = {
+                            load: function($q) {
+                                var defer = $q.defer();
+                                require([baseURL + name + '.js'], function() {
+                                    defer.resolve();
+                                });
+                                return defer.promise;
+                            }
+                        };
+                    }
+                };
+                var obj = new RouteParam('abc', true);
+
+                console.log(obj);
+                console.log(obj.templateUrl);
+            })
+</script>
+</body>
+</html>

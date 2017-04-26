@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    RegExp
+var exampleArr = [
+    {
+        "first": {
+            "value":"恭喜你购买成功！",
+        },
+        "keynote1":{
+            "value":"巧克力",
+            "color":"#173177"
+        },
+        "keynote2": {
+            "value":"39.8元",
+            "color":"#173177"
+        },
+        "keynote3": {
+            "value":"2014年9月22日",
+            "color":"#173177"
+        },
+        "remark":{
+            "value":"欢迎再次购买！",
+            "color":"#173177"
+        }
+    }
+];
+//先去掉所有的 {{}}，然后用\n 切割成数组，然后再查 冒号 冒号前面的信息作为key 后面的最为value
+//    var RegExp,
+//           str  =  "{ {result.DATA} }\n\n领奖金额:{ {withdrawMoney.DATA} }\n领奖  时间:{ {withdrawTime.DATA} }\n银行信息:{ {cardInfo.DATA} }\n到账时间:  { {arrivedTime.DATA} }\n{ {remark.DATA} }",
+//            str1,
+//            arr = [],
+//            arr1= [],
+//            obj = {};
+//    str1 =  str.replace(/{ {|} }/gi,'');
+//
+//    console.log(str1);
+var arr = [[1],[2]];
+console.log(arr.indexOf(arr[1]));
+    function round(num,d){
+        num *= Math.pow(10, d);
+        num = Math.round(num.toFixed());
+        num /= Math.pow(10, d);
+        return num;
+    }
+    var err = new Error('你是不是傻'),
+            i = 0;
+    console.log(round(43.43554,4));
+
+    function add(a, b){
+        i++;
+        if(i>3) { throw err};
+        return a+b;
+    }
+//    闭包
+    function fun(){
+        var num = 0;
+        return function(){
+          return  ++num;
+        }
+
+    }
+    var mul = fun();
+    nul();
+</script>
+</body>
+</html>

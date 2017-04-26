@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/untitled1/view/dicussion/main.css"/>
+</head>
+<body>
+<div ng-controller="myCtr" class="container">
+    <br/><br/>
+    <div class="test">
+        <div class="discussion" ng-repeat="a in arr">
+            <div class="left clearfix">
+                <!--头像-->
+                <div class="img" style="{{'background-image:url('+a.pc+')'}}"></div>
+                <!--昵称-->
+                <h4 ng-bind="a.name"></h4>
+            </div>
+            <div class="right">
+                <!--楼主信息-->
+                <div class="message">
+                    <p class="test-justify" ng-bind="a.message"></p>
+                </div>
+
+                <!--回复信息-->
+                <!--如果有数据展示为真-->
+                <div class="text-right">
+                    <!--初始化显示隐藏-->
+                    <span ng-init="a.data&&a.data.length?a.show=true:false"></span>
+                    <!--隐藏-->
+                    <button type="button" class="btn btn-sm" ng-click="talk" ng-show="!a.show">回复</button>
+                    <button type="button" class="btn btn-sm" ng-click="a.show=false" ng-show="a.show">收起回复</button>
+                </div>
+                <!--展示-->
+                <div class="replay" ng-show="a.show">
+                    <!--循环回复-->
+                    <div ng-repeat="r in a.data">
+                        <div class="left clearfix">
+                            <div class=" img" style="{{'background-image:url('+r.pc+')'}}"></div>
+                            <!--aaaaaaaaa-->
+                        </div>
+                        <div class="right">
+                            <div>
+                                <span ng-bind="r.name"></span>:
+                                <span ng-if="r.reply_name">回复 {{r.reply_name}} :</span>
+                                <span ng-bind="r.message"></span>
+                            </div>
+                            <!--昵称-->
+                            <div style="text-align: right" class="date">
+                                <span ng-bind="r.date| date: 'yyyy-MM-dd HH:mm'"></span>
+                                <span class="re_talk" ng-click="talk(r)">回复</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--说话-->
+                    <div class="text-right talk">
+                        <button class="btn btn-xs" ng-click="talk()">我也说一句</button>
+                    </div>
+                    <!--发布-->
+                    <div class="text-right" ng-show="true">
+                        <textarea rows="3" cols="20">
+                        </textarea>
+                        <button class="btn btn-xs btn-ifon" ng-click="sureTalk(a)">发表</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-right publish" ng-show="true">
+        <textarea rows="5" cols="20" ng-model="message"></textarea>
+        <button class="btn btn-xs btn-ifon" ng-click="sureTalk()">发表</button>
+    </div>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script src="/untitled1/view/dicussion/main.js"></script>
+
+</body>
+</html>

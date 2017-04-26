@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    //    var a = function ( name ) {
+    //
+    //        console . log ( name ) ;
+    //
+    //    };
+    ////    a ( 'abc' ) ; //abc
+    //
+    ////        不传参
+    //    var inject = function ( name , callback ) {
+    //
+    //        return function ( ) {
+    //
+    //            callback ( name ) ;
+    //
+    //        }
+    //
+    //    };
+    //
+    //    var test = inject ( 'abc' , a );
+    //    test ( ) ; //abc
+    var MyController = function ($scope, $http) {
+        $scope.test = 1;
+        $http.get('');
+    };
+//    MyController(); //undefined
+    var inject = {
+        dependencies: {},
+        register: function (key, value) {
+            this.dependencies [key] = value;
+        },
+        resolve: function (deps, func, scope) {
+            var arr = [];
+            for (var i = 0; i < deps.length; i++) {
+                if (this.dependencies.hasOwnProperty(deps [i])) {
+                    arr.push(this.dependencies [deps [i]])
+                }
+            }
+            console.log(arr);
+            return function () {
+                func.apply(scope || {}, arr);
+            }
+        }
+    };
+    inject . register ( '$http' , { 'get' : function ( ) { console . log ( 'get' ) } } ) ;
+    inject . register ( '$scope' , { 'test' : '' } ) ;
+    inject . register ( '$location' , { 'hash' : function ( ) { console . log ( 'hash' ) } } ) ;
+
+    MyController = inject . resolve ( [ '$http' , '$scope' ] , MyController ) ;
+    MyController();
+//    有错误：没有一一对应
+</script>
+</body>
+</html>

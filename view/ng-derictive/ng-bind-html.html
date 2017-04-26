@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+</head>
+<body>
+<br/><br/>
+
+<div ng-controller="myCtr" class="container">
+    <div ng-bind-html="title[0]"></div>
+    <!--<div ng-repeat="t in title">-->
+        <!--<p>答案: <span>{{obj[t]}}</span></p>-->
+        <!--<p>得分: {{obj[t+'_score']}}</p>-->
+    <!--</div>-->
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script>
+    var app = angular.module('app', []);
+    app.controller('myCtr', ['$scope', function ($scope) {
+        var obj ;
+        $scope.obj = obj = {
+            c1001: 'test1',
+            c1001_score: '10',
+            c1002: 'test2',
+            c1002_score: '20',
+            c1003: 'test3',
+            c1003_score: '30'
+        };
+       $scope.title = [
+           'c1001',
+           'c1002',
+           'c1003',
+       ]
+    }])
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+    <style>
+        .ul li:nth-last-of-type(1) {
+            /*匹配属于父元素的倒数第n个元素*/
+            /* w3c:选择器匹配属于父元素的特定类型的第 N 个子元素的每个元素*/
+            background: #ff0000;
+            border: 1px solid blue;
+        }
+        .ul2 li:nth-last-of-type(-n+2) {
+            /*匹配属于父元素的 最后2个元素*/
+            background: #ff0000;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+<br/><br/>
+
+<div ng-controller="myCtr" class="container">
+
+    <ul class="ul">
+        <h4>这是ul</h4>
+        <li ng-repeat="a in arr">{{a}}
+        </li>
+    </ul>
+    <ul class="ul2">
+        <h4>这是ul2</h4>
+        <li ng-repeat="a in arr">{{a}}
+        </li>
+    </ul>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script>
+    var app = angular.module('app', []);
+    app.controller('myCtr', ['$scope', function ($scope) {
+        $scope.arr = [];
+        for (var i = 0; i < 4; i++) {
+            $scope.arr[i] = i;
+        }
+    }])
+</script>
+</body>
+</html>

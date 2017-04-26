@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+</head>
+<body>
+<br/><br/>
+<div class="container">
+    <div ng-controller="ParentController">
+        <button type="button" class="btn btn-default" ng-click="sayHello()">派发</button>
+        <div ng-controller="ChildController">
+            <div ng-controller="sunController">
+                <button type="button" class="btn btn-default" ng-click="sayHello1()">通知</button>
+            </div>
+        </div>
+        <div ng-controller="Child1Controller">
+            <div ng-controller="sun1Controller">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script>
+
+    var app = angular.module('app', []);
+    app.controller('ParentController', function($scope) {
+        $scope.sayHello = function() {
+            $scope.$broadcast('to-child', 'hello');
+        };
+        $scope.$on('to-parent', function(event,data) {
+            console.log('ParentController', data);		 //子级能得到值
+        });
+    });
+    app.controller('ChildController', function($scope) {
+//        $scope.sayHello = function() {
+//            $scope.$emit('fromSubControllerClick','hello');
+//        };
+        $scope.$on('to-child', function(event,data) {
+            console.log('ChildCtrl', data);		 //子级能得到值
+        });
+        $scope.$on('to-parent', function(event,data) {
+            console.log('ChildCtrl', data);		 //子级能得到值
+        });
+    });
+    app.controller('Child1Controller', function($scope) {
+        $scope.$on('to-child', function(event,data) {
+            console.log('Child1Ctrl', data);		 //子级能得到值
+        });
+    });
+    app.controller('sunController', function($scope) {
+        $scope.$on('to-child', function(event,data) {
+            console.log('sunCtrl', data);		 //子级能得到值
+        });
+        $scope.sayHello1 = function() {
+            $scope.$emit('to-parent','hello1');
+        };
+    });
+    app.controller('sun1Controller', function($scope) {
+        $scope.$on('to-child', function(event,data) {
+            console.log('sun11Ctrl', data);		 //子级能得到值
+        });
+    });
+
+</script>
+</body>
+</html>

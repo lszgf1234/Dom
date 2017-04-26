@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/untitled1/view/felx/main.css"/>
+</head>
+<body>
+<div ng-controller="myCtr" class="container"><br/><br/>
+    <div class="row">
+        <div class="col-md-4">
+            <div class='thumbnail' >
+                <!--<div ng-switch  ng-class="t.type" on="t.type">-->
+                    <h4 class="title" >题目</h4>
+                    <p class="summary">详细内容</p>
+                    <div class='attr'>
+                        <div class='creat_name' >创建者</div>
+                        <div class=''  >2107-01-01</div>
+                    </div>
+                    <div class='actions'>
+                        <button class='btn btn-sm btn-default' ng-click="edit(t)">查看</button>
+                        <button class='btn btn-sm btn-default' ng-click="edit(t)">修改</button>
+                        <button class='btn btn-sm btn-default' ng-click="remove(t)">删除</button>
+                    </div>
+                    <!--<div class='actions' ng-switch-when="wx_temp">-->
+                        <!--<button class='btn btn-sm btn-default' ng-click="edit(t)">查看</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='thumbnail' >
+                <!--<div ng-switch  ng-class="t.type" on="t.type">-->
+                    <h4 class="title" >题目</h4>
+                    <p class="summary"></p>
+                    <div class='attr'>
+                        <div class='creat_name' >创建者</div>
+                        <div class=''  >2107-01-01</div>
+                    </div>
+                    <div class='actions'>
+                        <button class='btn btn-sm btn-default' ng-click="edit(t)">查看</button>
+                        <button class='btn btn-sm btn-default' ng-click="edit(t)">修改</button>
+                        <button class='btn btn-sm btn-default' ng-click="remove(t)">删除</button>
+                    </div>
+                    <!--<div class='actions' ng-switch-when="wx_temp">-->
+                        <!--<button class='btn btn-sm btn-default' ng-click="edit(t)">查看</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='thumbnail' >
+                <!--<div ng-switch  ng-class="t.type" on="t.type">-->
+                    <h4 class="title" >题目</h4>
+                    <p class="summary">：同步
+                        删改：（不支持）
+                        5.自定义模板消息
+                        查看：支</p>
+                    <div class='attr'>
+                        <div class='creat_name' >创建者</div>
+                        <div class=''  >2107-01-01</div>
+                    </div>
+                    <div class='actions'>
+                        <button class='btn btn-sm btn-default' ng-click="edit(t)">查看</button>
+                        <button class='btn btn-sm btn-default' ng-click="edit(t)">修改</button>
+                        <button class='btn btn-sm btn-default' ng-click="remove(t)">删除</button>
+                    </div>
+                    <!--<div class='actions' ng-switch-when="wx_temp">-->
+                        <!--<button class='btn btn-sm btn-default' ng-click="edit(t)">查看</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script>
+    angular.module('app', [])
+            .controller('myCtr', function ($scope) {
+
+            })
+</script>
+</body>
+</html>
