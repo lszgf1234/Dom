@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+</head>
+<body>
+<br/><br/>
+<!--<level-one>-->
+<!--<level-two>-->
+<!--<level-three>-->
+<!--Hello-->
+<!--</level-three>-->
+<!--</level-two>-->
+<!--</level-one>-->
+<div ng-controller="myCtr" class="container">
+    <!--<expander class='expander' expander-title='title'>-->
+    <!-- -->
+    <!--</expander>-->
+    <level-one expander-title='title'>{{title}}</level-one>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script>
+    //查看控制台，根据输出，判断执行顺序--然后对照图理解下
+//    如果想详细理解三者间的集体关系，采用个人排列组合测试
+    function createDirective(name) {
+        return function () {
+            return {
+                restrict: 'E',
+                scope: {
+                    title: '=expanderTitle'
+                },
+                compile: function (tElem, tAttrs) {
+                    console.log(name + ': compile');
+                    return {
+                        pre: function (scope, iElem, iAttrs) {
+                            console.log(name + ': compile+pre');
+                            scope.title += '+pre'
+                        },
+                        post: function (scope, iElem, iAttrs) {
+                            console.log(name + ': compile+post');
+                            scope.title += '+post'
+                        }
+                    }
+                },
+                link: function (scope, element, attrs) {
+                    console.log('link');
+                    scope.title += '+link'
+                },
+                controller: function (scope) {
+                    console.log('controller');
+                    scope.title += '+controlle'
+                }
+
+            }
+        }
+    }
+    var app = angular.module('app', []);
+    app.directive('levelOne', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                title: '=expanderTitle'
+            },
+            compile: function (tElem, tAttrs) {
+                console.log('compile');
+                return {
+                    post: function (scope, iElem, iAttrs) {
+                        scope.title += '+post'
+                    },
+                    pre: function (scope, iElem, iAttrs) {
+                        scope.title += '+pre'
+                    }
+                }
+            },
+            link: function ($scope, element, attrs) {
+                $scope.title += '+link'
+            },
+            controller: function ($scope) {
+                $scope.title += '+controlle'
+            }
+
+        }
+    });
+    //    app.directive('levelTwo', createDirective('levelTwo'));
+    //    app.directive('levelThree', createDirective('levelThree'));
+
+    app.controller('myCtr', ['$scope', function ($scope) {
+        $scope.title = '开始';
+//        $scope.text = '这里是内部的内容。';
+    }]);
+    //    app.directive('expander', function () {
+    //        return {
+    //            restrict: 'EA',
+    //            replace: true,
+    //            transclude: true,
+    //            scope: {
+    //                title: '=expanderTitle'
+    //            },
+    //            template: '<div>'
+    //            + '<div class="title" ng-click="toggle()">{{title}}</div>'
+    //            + '<div class="body" ng-show="showMe" ng-transclude></div>'
+    //            + '</div>',
+    //            link: function (scope, element, attrs) {
+    //                scope.showMe = false;
+    //                scope.toggle = function toggle() {
+    //                    scope.showMe = !scope.showMe;
+    //                }
+    //            }
+    //        }
+    //    });
+</script>
+</body>
+</html>

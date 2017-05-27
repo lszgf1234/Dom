@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/untitled1/view/pl/frame.css"/>
+
+</head>
+<body>
+<br/><br/>
+
+<div ng-controller="myCtr">
+    <div class='pl-layout'>
+        <div class='pl-layout-leftnav' ng-init="subView='nav1'">
+            <div class='pl-layout-leftnav-header'>
+                <a>信信通</a>
+            </div>
+            <ul class="nav nav-tabs nav-stacked">
+                <li ng-class="{'active':subView==='nav1'}"><a href="" ng-click="subView='nav1'">Nav1</a></li>
+                <li ng-class="{'active':subView==='nav2'}">
+                    <a href="" ng-click="subView='nav2'">Nav2</a>
+                    <ul class="nav nav-pills nav-stacked" ng-class="{'hide':['nav2','nav2-1','nav2-2'].indexOf(subView)===-1}">
+                        <li ng-class="{'active':subView==='nav2-1'}"><a href="" ng-click="subView='nav2-1'">Nav2-1</a></li>
+                        <li ng-class="{'active':subView==='nav2-2'}"><a href="" ng-click="subView='nav2-2'">Nav2-2</a></li>
+                    </ul>
+                </li>
+                <li ng-class="{'active':subView==='nav3'}"><a href="" ng-click="subView='nav3'">Nav3</a></li>
+                <li ng-class="{'active':subView==='nav4'}"><a href="" ng-click="subView='nav4'">Nav4</a></li>
+            </ul>
+        </div>
+        <div class='pl-layout-main pl-layout-main-topnav'>
+            <nav class="navbar navbar-default pl-navbar-fixed-top">
+                <div class='container-fluid'>
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <input type="text" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </nav>
+            <div class='container-fluid'>
+                <div class='row'>
+                    <nav class="navbar navbar-default">
+                        <div class='container-fluid'>
+                            <form class="navbar-form navbar-left">
+                                <div class="form-group">
+                                    <input type="text" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
+                            <form class="navbar-form navbar-right">
+                                <div class="form-group">
+                                    <input type="text" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+                <div>outsite row</div>
+                <div class='row'>
+                    <div>outsite col</div>
+                    <div class='col-md-12'>
+                        col-md-12
+                    </div>
+                    <div class='col-md-6'>
+                        col-md-6
+                    </div>
+                    <div class='col-md-6'>
+                        col-md-6
+                    </div>
+                </div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+                <div>outsite row</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script>
+    var app = angular.module('app', []);
+    app.controller('myCtr', ['$scope', function ($scope) {
+
+    }])
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/untitled1/view/flex/main.css"/>
+</head>
+<body>
+<br/><br/>
+
+<div ng-controller="myCtr" class="container">
+    <!--&lt;!&ndash;基础版-父容器设置上下左右对齐&ndash;&gt;-->
+    <div id="dad">
+        <div ng-repeat="d in data" ng-bind="d"></div>
+    </div>
+    <!--拓展版-设置伸缩子容器伸缩+设置父容器主轴方向   -->
+    <!--<div id="dadVer2">-->
+    <!--<div ng-repeat="d in data" ng-bind="d"></div>-->
+    <!--</div>-->
+    <!--高级版-->
+    <!--<div id="dadVer3">-->
+        <!--<div ng-repeat="d in data" ng-bind="d"></div>-->
+    <!--</div>-->
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script>
+    var app = angular.module('app', []);
+    app.controller('myCtr', ['$scope', function ($scope) {
+        $scope.data = [1, 2, 3
+            , 4, 5, 6, 7, 8, 9, 0
+        ];
+    }])
+</script>
+</body>
+</html>

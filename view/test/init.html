@@ -1,34 +1,20 @@
-<div class='container' ng-controller="ctrlHome">
-    <div class='row tms-panel' ng-if="site.home_carousel">
-        <div style="height: 305px" ng-controller="ctrlCarousel">
-            <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-                <div uib-slide ng-repeat="slide in slides" index="$index">
-                    <img ng-src="{{slide.picUrl}}" style="height:305px;margin:auto;">
-                    <div class="carousel-caption"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class='row'>
-        <uib-tabset active="0">
-            <uib-tab index="$index" ng-repeat="c in channels">
-                <uib-tab-heading>{{c.title}}</uib-tab-heading>
-                <div class='list-group'>
-                    <div class='list-group-item' ng-repeat="m in c._matters" ng-click='openMatter(m)'>
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" ng-src="{{m.pic}}">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">{{m.title}}</h4>
-                                <div>{{m.summary}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </uib-tab>
-        </uib-tabset>
-    </div>
+<div wrap="text" class="form-group">开始测验a！</div>
+<div class="form-group form-group-lg" wrap="input" schema="c1001" schema-type="shorttext"><label>问e1题222ddd22221</label><span
+        class="pull-right">aaaa</span> <input ng-model="data.c1001" title="信息1" placeholder=""
+                                              class="form-control input-lg" type="text"></div>
+<div wrap="input" class="form-group form-group-lg" schema="s1494386921778" schema-type="name"><label>姓名1</label><input
+        type="text" ng-model="data.s1494386921778" title="姓名1" required="" class="form-control input-lg"></div>
+<div wrap="input" class="form-group form-group-lg" schema="s1494395243248" schema-type="name"><label>姓名2</label><input
+        type="text" ng-model="data.s1494395243248" title="姓名2" required="" class="form-control input-lg"></div>
+<div wrap="input" class="form-group form-group-lg" schema="s1494395339533" schema-type="name"><label>姓名3</label><input
+        type="text" ng-model="data.s1494395339533" title="姓名3" required="" class="form-control input-lg"></div>
+<div wrap="input" class="form-group form-group-lg" schema="s1494395620999" schema-type="name"><label>姓名4</label><span
+        ></span><input type="text" ng-model="data.s1494395620999" title="姓名4" required=""
+                                          class="form-control input-lg"></div>
+
+<div id="btnSubmit" class="form-group" wrap="button">
+    <button class="btn btn-primary btn-block btn-lg" ng-click="submit($event,'result')"><span>提交考卷</span></button>
+</div>
+<div id="act1494380281837" wrap="button" class="form-group">
+    <button class="btn btn-primary btn-block btn-lg" ng-click="submit($event)"><span>提交信息</span></button>
 </div>

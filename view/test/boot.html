@@ -8,6 +8,7 @@
 </head>
 <body>
 <div ng-controller="myCtr" >
+
     <!--<nav class="navbar navbar-default">-->
     <!--<div class="container-fluid">-->
         <!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
@@ -31,6 +32,10 @@
         <!--</div>-->
     <!--</div>-->
 <!--</nav>-->
+    <div>
+        <span></span>
+        <input type="text" ng-model="schema.des"/>
+    </div>
 
 </div>
 <script src="/untitled1/js/jquery-1.11.3.js"></script>
@@ -59,7 +64,27 @@
 
                 console.log(obj);
                 console.log(obj.templateUrl);
+                $scope.matter = {
+                    matterState: true,
+                    open: function(){
+                        /*如果为真,可以发送请求,然后修改为false(做到不可访问);否则直接退出return*/
+                        var _this = this;
+                        _this.matterState?_this.matterState = false: return;
+                        if(_this.matterState){
+                            _this.matterState = false;
+                        }else{
+                            return;
+                        }
+                        /*成功后，修改为真；失败后也修改为真...*/
+                        $http.get('').
+                                success(function(rsp){
+                                    _this.matterState = true;
+                                /*待做的事情...*/
+                                }).error(function(err){_this.matterState = true;});
+                    }
+                }
             })
+
 </script>
 </body>
 </html>

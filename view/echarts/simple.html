@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+</head>
+<body>
+<br/><br/>
+
+<div ng-controller="myCtr" class="container">
+    <div id="echarts" style="width: 500px;height: 500px;"></div>
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script src="/untitled1/js/echarts.min.js"></script>
+<script>
+    var app = angular.module('app', []);
+
+    app.controller('myCtr', ['$scope', function ($scope) {
+
+        var myChart = echarts.init(angular.element('#echarts')[0]);
+//        var myChart = echarts.init(document.getElementById('echarts'));
+        var option = {
+            title: {
+                show: true,
+                text: 'ECharts \n入门示例',
+                link: 'https://www.baidu.com/',
+                target: 'blank',
+//                textAlign: 'center'
+
+            },
+            /*
+            *提示框组件。
+            */
+            tooltip: {
+                show: true,
+            },
+            /*
+                *图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
+            */
+            legend: {
+                data:['销量1', 'test']
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {},
+            /*
+            * 系列列表。每个系列通过 type 决定自己的图表类型
+            */
+            series: [{
+                name: '销量1',
+                type: 'bar',
+                data: [{
+                    value: 5,
+                    /*自定义弹框内容*/
+//                    tooltip: { formatter: '{a}<br>{b}:{c}'}
+                },
+                    20, 36, 10, 10, 20]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+
+    }]);
+</script>
+</body>
+</html>

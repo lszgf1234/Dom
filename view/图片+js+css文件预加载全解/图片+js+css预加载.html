@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href=""/>
+</head>
+<body>
+<div wrap="input" class="form-group form-group-lg" schema="s1495077203977" schema-type="name"><label>姓名1</label><input
+        ng-model="data.s1495077203977" title="姓名1" required="" class="form-control input-lg"></div>
+<div ></div>
+</body>
+<script>
+//    定义预加载内容,封装在preloader()
+    function preloader() {
+        if (document.getElementById) {
+//            预加载的图片
+//            document.getElementById("preload-01").style.background = "url(http://domain.tld/image-01.png) no-repeat -9999px -9999px";
+//            document.getElementById("preload-02").style.background = "url(http://domain.tld/image-02.png) no-repeat -9999px -9999px";
+//            document.getElementById("preload-03").style.background = "url(http://domain.tld/image-03.png) no-repeat -9999px -9999px";
+        }
+    }
+//    定义预加载方法 利用 window.onload 事件
+    function addLoadEvent(func) {
+        var oldonload = window.onload;
+//        如果 window.onload事件不存在 注册 window.onload 为预加载方法preloader
+//        如果window.onload存在 则直接执行预加载事件preloader
+        if (typeof window.onload != 'function') {
+            window.onload = func;
+        } else {
+            window.onload = function() {
+//                if内代码执行已定义在onload事件上的方法
+                if (oldonload) {
+                    oldonload();
+                }
+                func();
+            }
+        }
+    }
+    addLoadEvent(preloader);
+</script>
+<script>
+//    储存img标签的数组
+    var images = new Array();
+//      加载图片的方法
+    function preload() {
+        for (i = 0; i < preload.arguments.length; i++) {
+            images[i] = new Image();
+            images[i].src = preload.arguments[i];
+        }
+    }
+//    需要加载的图片已形参的方式传入 arguments类数组获取形参内容
+    preload(
+            "http://domain.tld/gallery/image-001.jpg",
+            "http://domain.tld/gallery/image-002.jpg",
+            "http://domain.tld/gallery/image-003.jpg"
+    )
+</script>
+<!--隐藏-->
+<div class="hidden">
+    <script type="text/javascript">
+        <!--//--><![CDATA[//><!--
+        if (document.images) {
+            img1 = new Image();
+            img2 = new Image();
+            img3 = new Image();
+            img1.src = "http://domain.tld/path/to/image-001.gif";
+            img2.src = "http://domain.tld/path/to/image-002.gif";
+            img3.src = "http://domain.tld/path/to/image-003.gif";
+        }
+        //--><!]]>
+    </script>
+</div>
+<!--js增强版--选择页面加载完事加载，window.onload事件-->
+<script>
+
+    //      加载图片的方法
+    function preload() {
+        //    储存img标签的数组
+        var images = new Array();
+//       储存img路径的数据，可填充
+        var imgPath = [
+            "http://domain.tld/gallery/image-001.jpg",
+            "http://domain.tld/gallery/image-002.jpg",
+            "http://domain.tld/gallery/image-003.jpg"
+        ];
+        for (i = 0; i < imgPath.length; i++) {
+            images[i] = new Image();
+            images[i].src = imgPath[i];
+        }
+    }
+    //  定义预加载方法 利用 window.onload 事件
+    function addLoadEvent(func) {
+        var oldonload = window.onload;
+        //        如果 window.onload事件不存在 注册 window.onload 为预加载方法preloader
+        //        如果window.onload存在 则直接执行预加载事件preloader
+        if (typeof window.onload != 'function') {
+            window.onload = func;
+        } else {
+            window.onload = function() {
+                //                if内代码执行已定义在onload事件上的方法
+                if (oldonload) {
+                    oldonload();
+                }
+                func();
+            }
+        }
+    }
+    addLoadEvent(preload);
+</script>
+<!--js增强版--选择自定义时间加载，timeout()定时器完成-->
+
+<!--ajax-->
+<script>
+    window.onload = function() {
+
+        setTimeout(function() {
+
+            // reference to <head>
+            var head = document.getElementsByTagName('head')[0];
+
+            //2. a new CSS 加载
+            var css = document.createElement('link');
+            css.type = "text/css";
+            css.rel  = "stylesheet";
+//            路径 需要定义
+            css.href = "xxx.css";
+
+            //3. a new JS 加载
+            var js  = document.createElement("script");
+            js.type = "text/javascript";
+            //路径 需要定义
+            js.src  = "xxx.js";
+
+            // preload JS and CSS
+            head.appendChild(css);
+            head.appendChild(js);
+
+            //4. preload image 直接加载
+            new Image().src = "http://domain.tld/preload.png";
+
+        }, 1000);
+
+    };
+
+</script>
+</html>

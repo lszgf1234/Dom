@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/untitled1/view/ngAnimate/main.css"/>
+    <style>
+        /*过渡*/
+        #div{
+            transition:all 1s linear;
+            height: 100px;
+            background: green;
+        }
+        #div.ng-hide{
+            /*transition:all 1s linear/!*放在这里显示时没有过渡效果 不采用*!/*/
+            height: 0;
+        }
+        /*动画*/
+        @keyframes ngAnimate{
+            from{
+                height:100px
+            }
+            to{
+                height: 0px;
+            }
+        }
+        #div1{
+            height: 100px;
+            background: green;
+        }
+        #div1.ng-hide{
+            animation:ngAnimate .5s linear;/*动画出现时没有动画*/
+        }
+    </style>
+</head>
+<body>
+<br/><br/>
+
+<div ng-controller="myCtr" class="container">
+    隐藏 过渡 DIV: <input type="checkbox" ng-model="myCheck">
+
+    <div id="div" ng-hide="myCheck"></div>
+
+    隐藏 动画 DIV: <input type="checkbox" ng-model="myCheck1">
+
+    <div id="div1" ng-hide="!myCheck1"></div>
+
+</div>
+<script src="/untitled1/js/jquery-1.11.3.js"></script>
+<script src="/untitled1/js/bootstrap.min.js"></script>
+<script src="/untitled1/js/angular.min.js"></script>
+<script src="/untitled1/js/angular-animate.js"></script>
+<script>
+    var app = angular.module('app', ['ngAnimate']);
+    app.controller('myCtr', ['$scope', function ($scope) {
+    }])
+</script>
+</body>
+</html>
