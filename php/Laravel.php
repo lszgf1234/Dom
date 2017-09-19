@@ -81,7 +81,7 @@
    $birth_date= explode('-', $tplData["birth_date"]);
    $edit_index = 0;
 ?>
-
+   
 
 
 
