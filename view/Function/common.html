@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    转换成数组
+    var toArray = function(s){
+        try{
+            return Array.prototype.slice.call(s);
+        } catch(e){
+            var arr = [];
+            for(var i = 0,len = s.length; i < len; i++){
+                //arr.push(s[i]);
+                arr[i] = s[i];  //据说这样比push快
+            }
+            return arr;
+        }
+    };
+
+//    数组去重
+    var unique = function(arr){
+        var obj = {},
+                newArr = [];
+        for(var i=0; i<arr.length; i++){
+            if(!obj[arr[i]]){
+                newArr.push(arr[i]);
+                obj[i] = true
+            }
+        }
+        return newArr;
+    };
+    Array.prototype.unique = function(){
+        var obj = {},
+                newArr = [];
+        for(var i=0; i<this.length; i++){
+            if(!obj[this[i]]){
+                newArr.push(this[i]);
+                obj[i] = true
+            }
+        }
+        return newArr;
+    };
+
+    //map方法的实现原理（手写）
+    if(!Array.prototype.map){
+        Array.prototype.map=function(callback){
+            var result=[];
+            for(var i=0;i<this.length;i++){
+                if(i in this){//防止稀疏数组
+                    result[i]=callback(this[i],i,this);
+                }
+            }
+            return result;
+        }
+    }
+/*
+    //测试key值是否存在
+    var arr = [];
+    arr[100] = 1;
+    1 in arr ; //false
+    100 in arr ;//true
+
+    var obj = {a: 1};
+    "b" in obj; //false
+    "a" in obj; //true
+*/
+
+</script>
+</body>
+</html>

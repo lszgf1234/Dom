@@ -72,8 +72,15 @@
 @endsection
 */
 
+//问题1 @component
+@component('pc.components.modal', ['custom_avator'=>$tplData['avatar_url']])
+@endcomponent
 
-
+//问题2 explode()
+<?php
+   $birth_date= explode('-', $tplData["birth_date"]);
+   $edit_index = 0;
+?>
 
 
 
