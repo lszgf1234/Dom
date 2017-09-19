@@ -68,7 +68,7 @@
 //ÍØÕ¹ÈÝÆ÷
 @section('title', 'Page Title')
 @section('content')
-    <p>This is my body content.11111</p>
+    <p>This is my body content.1111122</p>
 @endsection
 */
 
