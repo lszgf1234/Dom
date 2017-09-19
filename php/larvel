@@ -68,7 +68,7 @@
 //ÍØÕ¹ÈİÆ÷
 @section('title', 'Page Title')
 @section('content')
-    <p>This is my body content.1111122 rebase1</p>
+    <p>This is my body content.1111122 rebase1 1</p>
 @endsection
 */
 
