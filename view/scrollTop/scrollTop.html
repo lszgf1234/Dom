@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .returnTop {
+            position: fixed;
+            right: 40px;
+            bottom: 50px;
+            width: 140px;
+        }
+        .return_top{
+            display: none;
+        }
+        body{
+            height: 5000px;
+        }
+    </style>
+</head>
+<body>
+<aside class="returnTop">
+    <ul>
+        <li class="return_top js_top">
+            超过一屏幕后显示
+        </li>
+    </ul>
+</aside>
+<script src="/Dom/js/jquery-1.11.3.js"></script>
+<script>
+    var winHeight = window.innerHeight;
+
+    $(window).scroll(function (e) {
+        var el = document.scrollingElement || document.body;
+        if (el.scrollTop > winHeight) {
+            $('.js_top').show();
+        } else {
+            $('.js_top').hide();
+        }
+    });
+
+    $('.js_top').on('click', function () {
+        $('html, body').animate({
+            scrollTop: 0
+        });
+    });
+</script>
+</body>
+</html>

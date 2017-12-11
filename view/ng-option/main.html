@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <title></title>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <link rel="stylesheet" href="/untitled1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/Dom/css/bootstrap.min.css"/>
 </head>
 <body>
 <div ng-controller="myCtr">
     <select ng-model="mycity" ng-options="city.id as city.name for city in Cities"></select>
 </div>
-<script src="/untitled1/js/jquery-1.11.3.js"></script>
-<script src="/untitled1/js/bootstrap.min.js"></script>
-<script src="/untitled1/js/angular.min.js"></script>
+<script src="/Dom/js/jquery-1.11.3.js"></script>
+<script src="/Dom/js/bootstrap.min.js"></script>
+<script src="/Dom/js/angular.min.js"></script>
 <script>
     angular.module('app', [])
             .controller('myCtr', function ($scope) {

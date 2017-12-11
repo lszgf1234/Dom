@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/vue.js"></script>
+    <title></title>
+    <style>
+        .test{
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <!--&lt;!&ndash;运算支持 + - * / % &#45;&#45; 不支持 ++ &#45;&#45;  -&ndash;&gt;
+    &lt;!&ndash;支持 &&　||　三目　&ndash;&gt;
+    不支持es6 ``
+    +{{msg+1}}<br/>
+    -{{msg-1}}<br/>
+    *{{msg*2}}<br/>
+    /{{msg/2}}<br/>
+    %{{msg%3}}<br/>
+
+    &&{{msg && 5}}<br/>
+    ||{{0 || 5}}<br/>
+    三目{{msg? 5 :6}}<br/>
+    -->
+    <!--常用指令
+    &lt;!&ndash;指令&ndash;&gt;
+    &lt;!&ndash;v-hide不存在&ndash;&gt;
+    &lt;!&ndash;<h3 v-if="0">v-if</h3>&ndash;&gt;
+    &lt;!&ndash;<h3 v-show="0">v-show</h3>&ndash;&gt;
+    &lt;!&ndash;<h3 v-text="'v-text'">11</h3>&ndash;&gt;
+    &lt;!&ndash;<h3 v-html="'2<p>11111</p>'"></h3>&ndash;&gt;
+    &lt;!&ndash;<img :src="'/Dom/img/test.jpg'" alt=""/><br/>&ndash;&gt;
+    &lt;!&ndash;<a :href="'https://www.baidu.com/'">百度</a><br/>&ndash;&gt;
+    &lt;!&ndash;<h3 :style="{background:'red'}">:style</h3>&ndash;&gt;
+    &lt;!&ndash;<h3 :class="{test:1}">:class</h3>&ndash;&gt;
+    &lt;!&ndash;&lt;!&ndash;:disabled  取值只能是true / false&ndash;&gt;&ndash;&gt;
+    &lt;!&ndash;<button :disabled="true">clickMe</button>&ndash;&gt;
+    &lt;!&ndash;v-if v-else-if  进行分组。明确逻辑&ndash;&gt;
+    &lt;!&ndash;<ul>
+        <li v-if="1">v-if</li>
+        <li v-else-if="1">v-eles-if</li>
+        <li v-else>v-else</li>
+    </ul>&ndash;&gt;
+
+    &lt;!&ndash;<ul>
+        <li v-for="(vul, key) in [1,2,3,1]">{{'key:a'+key+ ',' +'vul:'+vul}}</li>
+        <li v-for="vul in [1,2,3,1]">{{vul}}</li>
+    </ul>&ndash;&gt;
+    -->
+
+
+
+
+
+</div>
+
+
+<script>
+    new Vue({
+        el:'#container',
+        data:{
+            msg:10
+        }
+    });
+
+</script>
+
+
+</body>
+</html>

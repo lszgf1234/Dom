@@ -12,31 +12,76 @@
 </div>
 
 <script>
-
+    var bus = new Vue();
     // 一切都是组件
     Vue.component('parent-component',{
         data: function () {
             return {
-                gift:'传家宝'
+                gift:'传家宝',
+                age: 11
             }
         },
         template:`
         <div>
             <h1>这是父组件</h1>
+            {{age}}
             <hr/>
-            <child-component :myValue="gift"></child-component>
-            <child-component myValue="money"></child-component>
+            <button @click="add"> add</button>
+            <button @click="sendToXiongEr">sendToXiongEr</button>
+            <child-component :myValue="gift" :age = 'age'></child-component>
         </div>
-        `
+        `,
+        methods: {
+            add: function(){
+                this.age++;
+                this.$children[0].addChild();
+            },
+            sendToXiongEr: function () {
+                //给熊二发消息
+                bus.$emit('msgToXiongEr','光头强又来偷木头了！');
+            }
+        },
+        mounted: function () {
+            //绑定一个自定义的事件 和 对应的处理函数
+            bus.$on('sendToXiongDa', function (msg) {
+                console.log('熊二传来的数据为'+msg);
+            })
+        }
+
     })
     Vue.component('child-component',{
-        props:['myValue'],
+        props:['myValue', 'age'],
         template:`
         <div>
             <h1>这是子组件</h1>
+            <button @click="addChild"> add</button>
+            <button @click="sendToXiongDa">sendToXiongDa</button>
             <p>{{"老爹给的礼物："+myValue}}</p>
+            <p>{{"儿子的年龄："+age}}</p>
         </div>
-        `
+        `,
+        methods: {
+            addChild: function(){
+                alert()
+             /* this.$options.methods.sendToXiongDa();
+                this.sendToXiongDa();
+
+                this.$parent.add();*/
+            },
+            sendToXiongDa: function () {
+                //给熊二发消息
+                bus.$emit('sendToXiongDa','1111光头强又来偷木头了！');
+            }
+        },
+        mounted: function () {
+            var self = this;
+
+            bus.$on('msgToXiongEr', function (msg) {
+//                在这里呢？
+                self.addChild()
+                console.log('熊二传来的数据为'+msg);
+            })
+        }
     })
 
 

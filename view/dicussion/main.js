@@ -10,7 +10,7 @@ angular.module('app', [])
                 id: 00,
                 date: new Date() * 1,
                 message: '我是一楼',
-                pc: '/untitled1/img/1DECD80DDF9828C466DC6F631028F7EC.jpg'
+                pc: '/Dom/img/1DECD80DDF9828C466DC6F631028F7EC.jpg'
             },
             {
                 //二楼
@@ -18,13 +18,13 @@ angular.module('app', [])
                 id: 10,
                 date: new Date() * 1,
                 message: '我是二楼',
-                pc: '/untitled1/img/1DECD80DDF9828C466DC6F631028F7EC.jpg',
+                pc: '/Dom/img/1DECD80DDF9828C466DC6F631028F7EC.jpg',
                 data: [
                     {
                         name: '赵1',
                         id: 00,
                         date: new Date() * 1,
-                        pc: '/untitled1/img/1DECD80DDF9828C466DC6F631028F7EC.jpg',
+                        pc: '/Dom/img/1DECD80DDF9828C466DC6F631028F7EC.jpg',
                         message: '我赵1回复钱1我赵1回复钱1我赵1回复钱1我赵1回复钱1我赵1回复钱1我赵1回复钱1我赵1回复钱1我赵1回复钱1我赵1回复钱1我赵1回复钱1我赵1回复钱1我赵1回复钱1我赵1回复钱1',
                         reply_name: '钱1',
                         reply_id: 10
@@ -33,7 +33,7 @@ angular.module('app', [])
                         name: '孙1',
                         id: 20,
                         date: new Date() * 1,
-                        pc: '/untitled1/img/1DECD80DDF9828C466DC6F631028F7EC.jpg',
+                        pc: '/Dom/img/1DECD80DDF9828C466DC6F631028F7EC.jpg',
                         reply_name: '赵1',
                         reply_id: 00
                     }
@@ -44,7 +44,7 @@ angular.module('app', [])
         var  init = function(){
             self = {
                 name: '老李',
-                pc:'/untitled1/img/1DECD80DDF9828C466DC6F631028F7EC.jpg',
+                pc:'/Dom/img/1DECD80DDF9828C466DC6F631028F7EC.jpg',
                 id:'s',
                 message:'',
             };
