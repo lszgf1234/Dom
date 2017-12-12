@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+1.如果模块名不含路径，那么import命令会去node_modules目录寻找这个模块。；如果模块名包含路径，那么import命令会按照路径去寻找这个名字的脚本文件。
+
+
+
+why:  一没有模块（module）体系，无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装起来
+where:
+    1. js文件
+    2. html
+what:模块功能
+    1. 静态化
+    2. es6模块不是对象，而是通过export命令显式指定输出的代码，再通过import命令输入。
+    3. 模块功能主要由两个命令构成：export和import。export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能。
+    4. 一个模块就是一个独立的文件。该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用export关键字输出该变量。下面是一个 JS 文件，里面使用export命令输出变量
+    5. export命令除了输出变量，还可以输出函数或类
+    6. 通常情况下，export输出的变量就是本来的名字，但是可以使用as关键字重命名。
+    7. 使用export命令定义了模块的对外接口以后，其他 JS 文件就可以通过import命令加载这个模块。
+    8. 注意，import命令具有提升效果，会提升到整个模块的头部，首先执行。
+    9.由于import是静态执行，所以不能使用表达式和变量，这些只有在运行时才能得到结果的语法结构
+    10.最后，import语句会执行所加载的模块，因此可以有下面的写法。
+    11. 如果多次重复执行同一句import语句，那么只会执行一次，而不会执行多次
+    12. 除了指定加载某个输出值，还可以使用整体加载，即用星号（*）指定一个对象，所有输出值都加载在这个对象上面。
+how:
+<script>
+    // ES6模块
+    import { stat, exists, readFile } from 'fs';
+//    上面代码的实质是从fs模块加载 3 个方法，其他方法不加载
+
+//    ES6 的模块自动采用严格模式，不管你有没有在模块头部加上"use strict";。
+
+//    输出
+    // profile.js
+    var firstName = 'Michael';
+    var lastName = 'Jackson';
+    var year = 1958;
+
+    export {firstName, lastName, year};
+
+
+//    as重命名
+    export {
+            firstName as streamV1,
+            lastName as streamV2
+            };
+
+    // main.js
+    import {firstName, lastName, year} from './profile';
+//    上面代码的import命令，用于加载profile.js文件，并从中输入变量。import命令接受一对大括号，里面指定要从其他模块导入的变量名。大括号里面的变量名，必须与被导入模块（profile.js）对外接口的名称相同
+    import { firstName as newName } from './profile'
+//    整体加载
+
+
+    import  * as name from './profile'
+
+
+//    module 三种输出 输入方式
+//    way1
+    export {
+            firstName,
+            lastName
+            };
+    import {firstName, lastName} from './profile';
+
+//    way2
+    export {
+            firstName ,
+            lastName
+            };
+    import  * as name from './profile'
+
+//    way3
+    export default {
+        firstName,
+        lastName
+    }
+    impt name from './profile'
+
+//    合并多个对象 例如全局枚举
+    import name1 from './profile1'
+    import name2 from './profile2'
+
+    let name  = $.extend({},
+            name1,
+            name2
+    )
+</script>
+<script>
+    // a.js
+    export default {
+    foo: 'hello',
+    bar: 'world'
+    };
+    // 写法一
+    import baz from './a';
+    // baz = {foo: 'hello', bar: 'world'};
+
+    // 写法二
+    import {default as baz} from './a';
+    // baz = {foo: 'hello', bar: 'world'};
+
+    // 写法三
+    import * as baz from './a';
+    // baz = {
+    //   get default() {return module.exports;},
+    //   get foo() {return this.default.foo}.bind(baz),
+    //   get bar() {return this.default.bar}.bind(baz)
+    // }
+</script>
+<script>
+
+</script>
+</body>
+</html>
