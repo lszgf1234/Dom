@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <div id="div">
+        <ul id="ul">
+            <li id="li" class="a b c d">aaa</li>
+            <li>bbbbb</li>
+        </ul>
+    </div>
+</head>
+<body>
+<script>
+    var div = document.getElementById('div');
+    div.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log(Array.isArray(e.target.classList))
+    });
+    /*div.onclick = function (e) {
+        console.log(e.target.id)
+    }*/
+
+
+</script>
+</body>
+</html>
