@@ -1,0 +1,8 @@
+前提：在项目文件夹内
+1、安装包：npm install -g generator-angular
+2、敲命令：
+(1)在views文件夹下的manageCenter文件夹下面新建workOrderManage文件：yo angular:view manageCenter/workOrderManage  
+
+出现：create app\views\managecenter\workordermanage.html即为成功；
+
+(2)新建控制器   yo angular:controller manageCenter/   
