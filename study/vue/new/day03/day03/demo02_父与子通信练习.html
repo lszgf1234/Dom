@@ -13,33 +13,50 @@
 
 <script>
 
-    Vue.component('my-label',{
-        props:['labelName'],
-        template:'<label>{{labelName}}</label>'
-    })
+
     Vue.component('my-input',{
-        props:['tips'],
-        template:'<input type="text" :placeholder="tips"/>'
-    })
-    Vue.component('my-button',{
-        props:['btnName'],
-        template:'<button>{{btnName}}</button>'
+        props:{
+            tips2:{
+                default:'tips2'
+            },
+            value:{
+                default:'33'
+            },
+        },
+        // 模板根部必须只用一个元素，否则编译错误
+        // 数组取值一一对应,哈希数组，没有顺序
+        //父组件用v-model 向子组件传值，props里面用value 接收
+        //改变父组件v-model的值时，直接用 this.$emit('input', '新值');
+        template:`
+                <div>
+
+                    <input type="text" :placeholder="value"/>
+                    <br>
+                    <input type="text" :placeholder="tips2"/>
+                </div>
+            `
     })
 
     Vue.component('my-login',{
         template:`
         <form>
-            <my-label labelName="用户名"></my-label>
-            <my-input tips="请输入用户名"></my-input>
-            <br/>
-            <my-label labelName="密码"></my-label>
-            <my-input tips="请输入密码"></my-input>
-            <br/>
-            <my-button btnName="登录"></my-button>
-            <my-button btnName="注册"></my-button>
+            <input type="text" >
+
+            <br>
+            <my-input v-model="tips1" :tips2 ="tips2"></my-input>
+
         </form>
-        `
+        `,
+        data(){
+            return {
+                tips1: 11111,
+                tips2: 22222
+            }
+
+        }
+
     })
+
 
 
     new Vue({

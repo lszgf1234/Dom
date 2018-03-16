@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/vue.js"></script>
+    <title></title>
+</head>
+<body>
+
+<div id="container">
+
+</div>
+<script>
+    var app = new Vue({
+        el:'#container',
+        data:{
+            car:{
+                brand:'Volvo',
+                price:30
+            }
+        },
+        beforeCreate:function () {
+            function beforeCreateAlert() {
+                console.log('beforeCreate')
+            }
+        },
+        created:function () {
+            console.log('Vue的实例创建完毕');
+        },
+        methods:{
+            methods1: function (){
+              alert('methods1')
+            }
+        },
+
+        filters:{
+            myCurrency:function(myInput,arg1){
+                console.log(222);
+                return result;
+            }
+        },
+
+        beforeMount:function () {
+            function beforeMountAlert() {
+                console.log('beforeMount')
+            }
+        },
+        mounted:function () {
+            function mountedAlert() {
+                console.log('mounted')
+            }
+        },
+        beforeUpdate:function () {
+            function beforeUpdateAlert() {
+                console.log('beforeUpdate')
+            }
+        },
+        updated:function () {
+            function updatedAlert() {
+                console.log('updated')
+            }
+        },
+        beforeDestroy:function () {
+            function beforeDestroyAlert() {
+                console.log('beforeDestroy')
+            }
+        },
+        destroyed:function () {
+            function destroyedAlert() {
+                console.log('destroyed')
+            }
+        },
+    })
+
+</script>
+
+
+
+
+</body>
+</html>
