@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编码解码</title>
+</head>
+<body>
+<script>
+    var path = 'http://jianjiao.test.ac.enimo.cn/activity/join?a=12344a';
+    //1. escape() 和 unescape()
+    escape(path)//"http%3A//jianjiao.test.ac.enimo.cn/activity/join%3Fa%3D12344a"
+    unescape("http%3A//jianjiao.test.ac.enimo.cn/activity/join%3Fa%3D12344a")//'http://jianjiao.test.ac.enimo.cn/activity/join?a=12344a'
+
+    //2. encodeURIComponent() 和 decodeURIComponent()   常用
+    encodeURIComponent(path)//"http%3A%2F%2Fjianjiao.test.ac.enimo.cn%2Factivity%2Fjoin%3Fa%3D12344a"
+    decodeURIComponent("http%3A%2F%2Fjianjiao.test.ac.enimo.cn%2Factivity%2Fjoin%3Fa%3D12344a")//'http://jianjiao.test.ac.enimo.cn/activity/join?a=12344a'
+
+    //注意： 两对编码解码可以互相混用
+
+    /*// where: 其他页面未登录，跳转到登录后，登录完成直接跳转回原页面
+        * 1.未登录页面跳转 location.href =  '/logig?' + encodeURIComponent('fromUrl=' + location.href)
+        * 2. 登录页，在登录成功后， location.href = fromUrl
+    */
+    // 获取参数正则
+    function getQueryString(name, search = decodeURIComponent(location.search)) {
+        var result = search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+        if (result == null || result.length < 1) {
+            return "";
+        }
+        return result[1];
+    }
+
+    var fromUrl =  getQueryString('fromUrl');
+
+    location.href = fromUrl
+
+
+
+</script>
+</body>
+</html>
