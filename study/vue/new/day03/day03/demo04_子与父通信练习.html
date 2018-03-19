@@ -24,12 +24,17 @@
             recvUserLogin: function (msg) {
                 console.log('接收到事件的值：'+msg)
                 this.isUserLogin = msg;
+                console.log(1, this.$refs);
             }
+        },
+        created: function () {
+        },
+        mounted: function () {
+
         },
         template:`
         <div>
-            <header-component
-            @checkUserLoginEvent="recvUserLogin"></header-component>
+            <header-component @checkUserLoginEvent = "recvUserLogin" :test="1" ref="testRef"></header-component>
             <ul v-if="isUserLogin">
                 <li v-for="tmp in productList">
                     {{tmp}}
@@ -41,6 +46,7 @@
 
 //组件的生命周期：create/mount/update/destroy
     Vue.component('header-component',{
+        // props: ['test'],
         data: function () {
             return {
                 isLogin:false
@@ -52,6 +58,7 @@
         mounted: function () {
             //挂载完毕之后 触发自定义事件checkUserLoginEvent
             this.$emit('checkUserLoginEvent',this.isLogin);
+            console.log(this)
         }
     })
 

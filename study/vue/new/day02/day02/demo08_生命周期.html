@@ -31,10 +31,11 @@
             }
         },
         beforeCreate: function () {
-            console.log('准备创建组件');
+            console.log('准备创建组件'+ this.count);
         },
         created: function () {
-            console.log('组件创建完毕');
+
+            console.log('组件创建完毕'+ this.count);
         },
         beforeMount: function () {
             console.log('组件的模板准备挂载到DOM');
