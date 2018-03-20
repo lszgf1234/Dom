@@ -64,6 +64,10 @@ gulp.task('clean', function () {
         }));
 });
 
+// 配置是否压缩js
+gulp.task('compress:js', function() {
+    // webpackConf.plugins = webpackConf.plugins.slice(1);
+});
 gulp.task('compile:js', function (callback) {
     var entry = {};
     // glob.sync("src/js/page/**/*.js").map(function (file) {
@@ -259,10 +263,11 @@ gulp.task('IMerge', function(){
 
 gulp.task('cp:lang', function() {
     return gulp.src('resources/lang/**/*.*')
-        .pipe(gulp.dest('dist/resources/lang'));
+        .pipe(gu.dest('dist/resources/lang'));
 
 });
-gulp.task('dev', gulpSequence('clean', 'mv', ['compile:js'], 'watch'));
+
+gulp.task('dev', gulpSequence('compress:js', 'clean', 'mv', ['compile:js'], 'watch'));
 
 
 gulp.task('iMerge', gulpSequence('clean', 'mv', ['compile:stylus', 'compile:js'], 'IMerge'));

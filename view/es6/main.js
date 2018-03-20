@@ -1,9 +1,9 @@
 /**
  * Created by Administrator on 2017/12/21.
  */
-"use strict";
+
 var f = v => v;
-//µÈ¼ÛÓÚ
+//ï¿½È¼ï¿½ï¿½ï¿½
 var f = function (v) {
     return v;
 };
@@ -43,8 +43,8 @@ var timer = setInterval(()=>v
     }
 });
 
-//¹ýÂËÆ÷ ¹ýÂËÊý¾Ý¡£
-// Ö»ÒªÅ¼Êý
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
+// Ö»ÒªÅ¼ï¿½ï¿½
 var arr = [1, 2, 3];
 var newArr = [];
 arr.map(x => {
@@ -52,7 +52,7 @@ arr.map(x => {
         newArr.push(x);
     }
 });
-//ÅÅÐò
+//ï¿½ï¿½ï¿½ï¿½
 var result = [5, 6, 'fg', 4, 'hj'].sort((a, b) => a - b);
 var page = {
     total: 100,
