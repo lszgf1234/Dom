@@ -10,7 +10,7 @@ var rev = require('gulp-rev');
 var revCollector = require('gulp-rev-collector');
 
 var webpackConf = require('./conf/webpack.config.js');
-var staticDir = ['js', 'css', 'img', 'fonts'];
+var staticDir = ['js', 'css', 'img', 'fonts', 'lib'];
 var nPath = require('path');
 var urlReplace = require('gulp-url-replace');
 var buildConfig = require('./conf/build.config.js');
