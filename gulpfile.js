@@ -66,7 +66,7 @@ gulp.task('clean', function () {
 
 // 配置是否压缩js
 gulp.task('compress:js', function() {
-    // webpackConf.plugins = webpackConf.plugins.slice(1);
+    webpackConf.plugins = webpackConf.plugins.slice(1);
 });
 gulp.task('compile:js', function (callback) {
     var entry = {};
