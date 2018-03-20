@@ -1,47 +1,20 @@
-/**
- * Created by Administrator on 2017/12/19.
- */
 var gulp = require('gulp');
-//ÒıÈëÑ©±ÌÍ¼ºÏ³É²å¼ş
-var spritesmith = require('gulp.spritesmith');
-gulp.task('default', function () {
-    return gulp.src('img/*.png')
-        .pipe(spritesmith({
-            imgName: 'images/sprite.png',    //±£´æºÏ²¢ºóµÄÃû³Æ
-            cssName: 'css/sprite.css',       //±£´æºÏ²¢ºócssÑùÊ½µÄµØÖ·
-            padding: 2,                      //ºÏ²¢Ê±Á½¸öÍ¼Æ¬µÄ¼ä¾à
-            algorithm: 'binary-tree',        //×¢ÊÍ1
-            //cssTemplate:'css/handlebarsStr.css'    //×¢ÊÍ2
-            cssTemplate: function (data) {     //Èç¹ûÊÇº¯ÊıµÄ»°£¬Õâ¿ÉÒÔÕâÑùĞ´
-                var arr = [];
-                data.sprites.forEach(function (sprite) {
-                    arr.push(".icon-" + sprite.name +
-                    "{" +
-                    "background-image: url('" + sprite.escaped_image + "');" +
-                    "background-repeat: no-repeat;" +
-                    "background-position: " + sprite.px.offset_x + " " + sprite.px.offset_y + ";" +
-                    "background-size: " + sprite.px.width + " " + sprite.px.height + ";" +
-                    "width: " + sprite.px.width + ";" +
-                    "height: " + sprite.px.height + ";" +
-                    "}\n");
-                });
-                return arr.join("");
-            }
-        }))
-        .pipe(gulp.dest('dest/'));   //Êä³öÄ¿Â¼
-});
-
-//Íê³É´ò°üÑ¹Ëõ
-
-/*ÒÀÀµ*/
+var stylus = require('gulp-stylus');
+var sourcemaps = require('gulp-sourcemaps');
+var webpack = require('webpack');
+var gulpSequence = require('gulp-sequence');
 var rimraf = require('rimraf');
 var glob = require('glob');
-//webpackÅäÖÃÎÄ¼ş ±àÒëÑ¹Ëõjs
+var minimist = require('minimist');
+var rev = require('gulp-rev');
+var revCollector = require('gulp-rev-collector');
+
 var webpackConf = require('./conf/webpack.config.js');
-//ÅäÖÃ
-//²»²ÎÓëÑ¹ËõµÄÎÄ¼şÄ¿Â¼
-var staticDir = ['src/lib', 'src/img', 'src/fonts'];
-//ÅäÖÃÏî
+var staticDir = ['js', 'css', 'img', 'fonts'];
+var nPath = require('path');
+var urlReplace = require('gulp-url-replace');
+var buildConfig = require('./conf/build.config.js');
+
 var knowOptions = {
     string: 'env',
     default: {
@@ -49,8 +22,33 @@ var knowOptions = {
     }
 };
 
+var env = minimist(process.argv.slice(2), knowOptions).env;
+var isProduction = env === 'production';
+var dirReplacement = isProduction ? {
+    '/build/': '//s.wdyedu.com/build/'
+} : {};
+var urlReplacement = isProduction ? {
+    "//wdyedu-static-dev.bj.bcebos.com/": "//17dayup-passport-dev.bj.bcebos.com/"
+} : {};
 
-/*Ä¿Â¼Çå¿ÕÎÄ¼ş*/
+gulp.task('compile:stylus', function () {
+    var styl = stylus({
+        'include css': true,
+        compress: isProduction
+    });
+    styl.on('error', function(e){
+        console.log(e);
+        styl.end();
+    });
+
+    return gulp.src('src/css/**/*.styl')
+        .pipe(sourcemaps.init())
+        .pipe(styl)
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('build/css'));
+});
+
+
 gulp.task('clean', function () {
     return Promise.all(
         ['build', 'dist'].map(function (dir) {
@@ -66,32 +64,14 @@ gulp.task('clean', function () {
         }));
 });
 
-/*ÒÆ¶¯ÒıÈëµÄÎÄ¼ş£¨²»²ÎÓëÑ¹ËõµÄ£©*/
-gulp.task('mv', function () {
-    return Promise.all(
-        staticDir.map(function (dir) {
-            return new Promise(function (resolve, reject) {
-                gulp.src(dir + '/**/*.*')
-                    .pipe(gulp.dest('build/' + dir.substring(4)))
-                    .on('end', resolve)
-                    .on('error', reject);
-            })
-        })
-    )
-});
-
-//±àÒëÑ¹ËõÎÄ¼ş
-//js
 gulp.task('compile:js', function (callback) {
     var entry = {};
-    glob.sync("src/js/page/**/*.js").map(function (file) {
-        entry[file.replace('src', 'build')] = require('path').join(__dirname, file);
+    // glob.sync("src/js/page/**/*.js").map(function (file) {
+    //     entry[file.replace('src', 'build')] = require('path').join(__dirname, file);
+    // });
+    glob.sync("view/es6/**/*.js").map(function (file) {
+        entry[file.replace('view', 'build/view')] = require('path').join(__dirname, file);
     });
-
-    //¿ª·¢ÕâÄ£Ê½²»Ñ¹Ëõ
-    if(knowOptions.default.env == 'development'){
-        webpackConf.plugins.shift();
-    }
 
     var config = Object.assign({}, webpackConf, {
         entry : entry,
@@ -124,14 +104,167 @@ gulp.task('compile:js', function (callback) {
         return flag = false;
     });
 });
-//¼àÌıÎÄ¼ş
-gulp.task('watch', function () {
-    //gulp.watch(['src/css/**/*.styl', 'src/css/**/*.css'], ['compile:stylus']);
-    gulp.watch(staticDir, ['mv']);
-    gulp.watch(['/view/**/*.*'], ['compile:js']);
+
+gulp.task('mv', function () {
+    return Promise.all(
+        staticDir.map(function (dir) {
+            return new Promise(function (resolve, reject) {
+                gulp.src(dir + '/**/*.*')
+                    .pipe(gulp.dest('build/src/' + dir))
+                    .on('end', resolve)
+                    .on('error', reject);
+            })
+        })
+    )
 });
 
+gulp.task('watch', function () {
+    // gulp.watch(['src/css/**/*.styl', 'src/css/**/*.css'], ['compile:stylus']);
+    gulp.watch(staticDir, ['mv']);
+    // gulp.watch(['src/js/**/*.*'], ['compile:js']);
+    gulp.watch(['view/es6/**/*.js'], ['compile:js']);
+});
 
-gulp.task('dev', gulpSequence('clean', 'mv', [ 'compile:js'], 'watch'));
+gulp.task('sync', function() {
+    var cmd = require('child_process').spawn('nobone-sync', ['nobone-sync-config.js']);
+    cmd.stdout.on('data', function(data) {
+        console.log(`stdout: ${data}`);
+    });
+    cmd.stderr.on('data', function(data) {
+        console.log(`stderr: ${data}`);
+    });
+});
+
+// hash
+gulp.task('hash', function () {
+    var task = new Promise(function (resolve) {
+        gulp.src(['build/**/*.*', '!build/lib/ionicons/**/*.*',  '!build/lib/share/**/*.*'])
+            .pipe(rev())
+            .pipe(gulp.dest('dist/build'))
+            .pipe(rev.manifest())
+            .pipe(gulp.dest('rev'))
+            .on('end', resolve)
+    });
+    var fonts = new Promise(function(resolve) {
+        gulp.src('build/lib/ionicons/**/*.*')
+            .pipe(gulp.dest('dist/build/lib/ionicons/'))
+            .on('end', resolve);
+    });
+    var share = new Promise(function(resolve) {
+        gulp.src('build/lib/share/**/*.*')
+            .pipe(gulp.dest('dist/build/lib/share/'))
+            .on('end', resolve);
+    });
+    return Promise.all([task, fonts, share])
+});
+
+gulp.task('rev', function(){
+    var rev = new Promise(function(resolve, reject){
+        gulp.src(['rev/**/*.json', 'dist/build/**/*.css', 'dist/build/**/*.js'])
+            .pipe(revCollector({
+                replacedReved: true,
+                dirReplacements: dirReplacement
+            }))
+            .pipe(gulp.dest('dist/build'))
+            .on('end', resolve);
+    });
+    var revHtml = new Promise(function(resolve, reject){
+        gulp.src(["rev/**/*.json", 'resources/**/*.blade.php'])
+            .pipe(revCollector({
+                replaceReved: true,
+                dirReplacements: dirReplacement
+            }))
+            .pipe(urlReplace(urlReplacement))
+            .pipe(gulp.dest('dist/resources'))
+            .on('end', resolve)
+    });
+
+    return Promise.all([rev, revHtml])
+});
+
+gulp.task('header_footer', function() {
+    /* for biz */
+    var files = ['rev/**/*.json', './build/**/header_footer.js', './build/**/header_footer.css'];
+    return gulp.src(files)
+        .pipe(revCollector({
+            replacedReved: true,
+            dirReplacements: dirReplacement
+        }))
+        .pipe(gulp.dest('dist/build'))
+});
+
+gulp.task('upload:bos', function() {
+    var BosClient = require('bce-sdk-js').BosClient;
+
+    var client = new BosClient(buildConfig.bosConfig);
+    var bucket = buildConfig[env].bosBucket;
+    var jsFiles = ['./build/js/page/header_footer.js'];
+    var cssFiles = ['./build/css/bos/header_footer.css'];
+
+    return Promise.all(
+        uploadWithDir(jsFiles, 'js').concat(uploadWithDir(cssFiles, 'css'))
+    ).catch(e => console.dir(e));
+
+    function getFileName(str) {
+        return str.split('/').pop();
+    }
+
+    function uploadWithDir(files, dir) {
+        dir = dir ? dir : '';
+        if (dir && dir.substring(dir.length - 1) != '/') {
+            dir = dir + '/';
+        }
+        return files.map(file => client.putObjectFromFile(bucket, dir + getFileName(file), file))
+    }
+});
+
+gulp.task('IMerge', function(){
+    var IMerge = require('imerge');
+    var options = {
+        from: 'build/css/',
+        cssTo: 'build/css',
+        spriteTo: 'build/sprite',
+        sourceContext: __dirname,
+        outputContext: 'build/sprite',
+        pattern: 'build/css/**/*.css',
+        defaults: {
+            padding: 20
+        }
+    };
+    var pathFilter = {
+        /*// å›¾ç‰‡åœ°å€è¿‡æ»¤å™¨
+        imagePathFilter: function(file, conf) {
+            // åªå¤„ç†png
+            if (!/\.png$/.test(file)) {
+                return file;
+            }
+        },*/
+
+        spriteTo: function(merge, file) {
+            console.log(merge);
+            return nPath.join(options.spriteTo, '/sprite_' + merge + '.png');
+        },
+        spritePathFilter: function(file) {
+            return '/' + file.replace(/\\/g, '/');
+        },
+        cssTo: function(file) {
+            return nPath.join(options.cssTo, nPath.relative(options.from, file));
+        }
+    };
+
+    var iMerge = new IMerge.IMerge(options, pathFilter);
+    return iMerge.start();
+
+});
+
+gulp.task('cp:lang', function() {
+    return gulp.src('resources/lang/**/*.*')
+        .pipe(gulp.dest('dist/resources/lang'));
+
+});
+gulp.task('dev', gulpSequence('clean', 'mv', ['compile:js'], 'watch'));
+
+
 gulp.task('iMerge', gulpSequence('clean', 'mv', ['compile:stylus', 'compile:js'], 'IMerge'));
-gulp.task('build:test', gulpSequence('clean', 'mv', ['compile:stylus', 'compile:js'], 'IMerge', 'hash', 'rev', 'header_footer'));
+gulp.task('build:test', gulpSequence('clean', ['mv','cp:lang'], ['compile:stylus', 'compile:js'], 'IMerge', 'hash', 'rev', 'header_footer'));
+gulp.task('build', gulpSequence('clean', ['mv','cp:lang'], ['compile:stylus', 'compile:js'], 'IMerge', 'hash', 'rev', 'header_footer'));

@@ -10,15 +10,23 @@
 <div id="container">
     <p>{{msg}}</p>
     <!-- 完成组件的调用-->
-    <my-component></my-component>
+    <my-component>
+        <div slot = "mySlot"> 这是一个slot</div>
+    </my-component>
 </div>
 
-<script>
+<script type="">
 
     //创建组件的方式
     Vue.component('my-component',{
-        template:'<h1>Hello Component</h1>'
+        template:`
+        <div>
+            <h1>Hello Component</h1>
+            <slot name = "mySlot">abc</slot>
+        </div>
+        `
     });
+
 
     new Vue({
         el: '#container',

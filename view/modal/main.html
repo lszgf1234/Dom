@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/Dom/css/bootstrap.css">
+    <style>
+        .jq-modal-1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .bg{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6)
+        }
+        .main{
+            position: relative;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+</button>
+<div class="jq-modal-1">
+    <div class="bg"></div>
+    <div class="main">
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab at dicta dolor dolorem doloremque eum fuga
+            fugiat illo impedit iure labore perferendis quaerat quas, similique tempora? Consectetur consequuntur neque
+            voluptatem.
+        </div>
+        <div>A ab accusantium ad animi asperiores aspernatur atque cum dicta dignissimos dolore exercitationem fuga
+            ipsam labore, maiores minima modi quam quasi repellat, repellendus sequi sint sit soluta suscipit, tempora
+            tenetur?
+        </div>
+        <div>Animi commodi consequatur earum eius, enim et eum facere inventore itaque iure laborum laudantium odio
+            perspiciatis praesentium quam quas qui recusandae reprehenderit rerum sed similique soluta voluptas
+            voluptate. Excepturi, perferendis.
+        </div>
+        <div>Adipisci aliquam asperiores beatae corporis fugiat illum laudantium natus neque nostrum perferendis,
+            perspiciatis, quibusdam, suscipit totam. Cum dignissimos dolorem eius, explicabo inventore molestias
+            possimus praesentium sint! Cumque deleniti laboriosam voluptatibus!
+        </div>
+        <div>Ab cupiditate maxime omnis quae voluptate? Accusantium consectetur enim et ipsum nesciunt reiciendis sit
+            veniam! Delectus deserunt fugiat laudantium minus nam vel voluptatem! Dicta dignissimos distinctio maiores
+            quam quod tempora.
+        </div>
+        <div>Ab adipisci amet aperiam assumenda, autem consequatur delectus doloribus, eveniet fugiat impedit inventore
+            ipsam itaque magnam nam, nisi non omnis praesentium repellat sint tempora ullam vero voluptatem? Assumenda,
+            cum, deserunt.
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/Dom/js/jquery.min.js"></script>
+<script src="/Dom/js/bootstrap.js"></script>
+</body>
+</html>
