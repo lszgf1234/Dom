@@ -8,15 +8,15 @@
             padding: 0;
             margin: 0;
         }
-        .clearfix:before, .clearfix:after{
+
+        .clearfix:before, .clearfix:after {
             display: table;
             content: ""
         }
 
-        .clearfix:after{
+        .clearfix:after {
             clear: both
         }
-
 
         li {
             list-style: none;
@@ -56,13 +56,14 @@
         }
 
         .loading {
-            background: url("image/loading.gif") no-repeat center center;
+            background: url("Dom/img/liveing.gif") no-repeat center center;
         }
 
         #back {
             cursor: hand;
             cursor: pointer;
         }
+
     </style>
 </head>
 <body>
@@ -79,6 +80,7 @@
     <img as="image/9.jpg"/>
     <img as="image/10.jpg"/>
 </div>
+<div class="loading"></div>
 <div class="floor" id="floor">
     <ul id="floorUl">
         <li>第一张</li>
@@ -101,28 +103,52 @@
     //      监听onscroll事件，
     //      判断条件 窗口滚动高度 大于 当前元素offsetTop+当前元素高度
 
+    /*function Scroll(callback, id) {
+        this.callback =callback;
+    }
+    var scro = new Scroll(11, 'idname')*/
+    var Scroll = {
+        id: '',
+        innerHeight: document.documentElement.clientHeight || document.body.clientHeight,
+        main: '',
+        loadStatus: true,
+        callback: '',
+        init: function (id, callback) {
+            if(id && callback){
+                Scroll.main = document.getElementById("main");
+                Scroll.callback = callback;
+            }
 
-    var innerHeight = document.documentElement.clientHeight || document.body.clientHeight;
-    var main = document.getElementById("main");
-    var loadStatus = true;
+        }
+    };
+    Scroll.init('main', 111)
+    // var innerHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    // var main = document.getElementById("main");
+    // var loadStatus = true;
+
     function infiniteScrolling(loadStatus) {
         // 判断状态，禁止多次发送请求
         // 发送请求，成功或失败后修改loadStatus = false
-        if(loadStatus){
+        if (loadStatus) {
             loadStatus = false;
             // 发送请求，成功或失败后修改loadStatus = true;
+            callback.then(function () {
+                loadStatus = true
+            })
         }
         // 发送请求
     }
+
     window.onload = window.onscroll = function () {
         // 无限加载，如果滑动到底部，触发
         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        var offsetMain = main.offsetHeight + main.offsetTop;
+        var offsetMain = Scroll.main.offsetHeight + Scroll.main.offsetTop;
         // var clientMain = main.clientHeight + main.clientTop;
         // 无限加载，如果滑动到底部，触发
-        if(scrollTop >= offsetMain-innerHeight){
+        if (scrollTop >= offsetMain - Scroll.innerHeight) {
             // 触发回调函数
-            infiniteScrolling(loadStatus)
+            alert();
+            // infiniteScrolling(loadStatus)
         }
     };
 

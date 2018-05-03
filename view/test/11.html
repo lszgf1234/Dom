@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        div{
-            /*背景图可以引入动图*/
-            background: url(/Dom/img/liveing.gif) no-repeat 0 0 ;
-            width: 100px;
-            height: 100px;
 
-        }
     </style>
 </head>
 <body>
-<div ></div>
+<div class="a">bbbbbb</div>
+<div class="cli"></div>
+
 <!--<img src="/Dom/img/liveing.gif" alt="">-->
+<script>
+    document.querySelector('.a').onclick = function () {
+        alert();
+    };
+    var ele = document.createElement('div');
+    ele.innerHTML = 'bbbbbb';
+    document.querySelector('.cli').innerHTML = '<button class="a">aaaa</button>';
+</script>
 </body>
 </html>

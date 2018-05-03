@@ -8,6 +8,9 @@
 <body>
 
 <div id="container">
+    <div class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut beatae consectetur, debitis ex excepturi explicabo harum itaque modi provident similique ullam vero voluptatibus. A aut fugit itaque officia tempora!
+        <input @click="alert1" type="radio">标签
+    </div>
     <p>{{msg}}</p>
     <h1>{{price}}</h1>
     <h1>{{price | myCurrency('￥')}}</h1>
@@ -20,6 +23,11 @@
         data: {
             msg: 'Hello Vue',
             price:356
+        },
+        methods:{
+            alert1(){
+                alert(1);
+            }
         },
         //过滤器的本质 就是一个有参数有返回值的方法
         filters:{

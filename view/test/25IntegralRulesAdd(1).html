@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>积分规则新增</title>
+    <!--<link rel="stylesheet" href="css/content.css"/>
+    <link rel="stylesheet" href="css/product.css"/>
+    <link rel="stylesheet" href="css/group.css">-->
+    <script src="/Dom/js/jquery-1.11.3.js"></script>
+    <!--<script src="js/cookie.js"></script>-->
+    <script type="text/javascript">
+        var baseUrl = 'http://127.0.0.1/mg';
+    </script>
+</head>
+<body id="ticketAdd" class="ticket IntegralRulesAdd">
+<div class="ladder">
+    <form id="upload" enctype="multipart/form-data">
+        <table>
+            <tr class="leixing d">
+                <td>交易类型：</td>
+                <td class="xia">
+                    <select name="trans_type" id="trans_type">
+                        <option value="00">购买会员卡</option>
+                        <option value="01">账户充值</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="leixing d">
+                <td>积分类型：</td>
+                <td class="xia">
+                    <select id="integral_type" name="integral_type">
+                        <option value="00">累进制</option>
+                        <option value="01">阶梯制</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="prop">
+                <td>积分比例：</td>
+                <td><input type="text" name="integral_rule" id="integral_rule" class="score-one"/></td>
+                <td>%</td>
+            </tr>
+            <tr class="d">
+                <td>
+                    <div id="box">
+                        <table id="shuju" name="integral_rule">
+                            <button id="xinzen" type="button">新增</button>
+                            <thead>
+                            <tr>
+                                <td>起始(单位元）</td>
+                                <td>截止(包含)(单位元）</td>
+                                <td>积分比例(%)</td>
+                                <td>操作</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><input type="text" class="start"></td>
+                                <td><input type="text" class="end"></td>
+                                <td><input type="text" class="score"></td>
+                                <td>
+                                    <button class="del" type="button" onclick="del(this)">删除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr class="guize">
+                <td>规则描述：</td>
+                <td><textarea id="integral_desc" name="integral_desc" rows="6" cols="23"></textarea></td>
+            </tr>
+        </table>
+        <div class="btn-1">
+            <button type="button" onclick="addClubCard()">确定</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // 累进制和阶梯制置灰设置
+    $(document).ready(function () {
+        $("#box input").attr({"disabled": "disabled"});
+        $('#integral_type').change(function () {
+            var integral_type;
+            integral_type = $("#integral_type option:selected").val();
+            if (integral_type == "00") {
+                $("#box input").val("");
+                $("#box input").attr({"disabled": "disabled"});
+                $(".prop input").removeAttr("disabled");
+            } else {
+                $(".prop input").val("");
+                $(".prop input").attr({"disabled": "disabled"});
+                $("#box input").removeAttr("disabled");
+            }
+        });
+    });
+    // 阶梯制表格的增加与删除
+    $(function () {
+        $("#xinzen").click(function () {
+            $("#shuju").append(
+                /*`<tr>
+						<td><input type="text" class="start"></td>
+                        <td><input type="text" class="end"></td>
+                        <td><input type="text" class="score"></td>
+						<td>
+							<button class="del" type="button" onclick = "del(this)">删除</button>
+						</td>
+						</tr>`*/
+            );
+        });
+    });
+
+    function del(that) {
+        $(that).parent().parent().remove();
+    }
+
+    // <!--//		var baseUrl = 'http://127.0.0.1/mg';-->
+    // <!--//		function addClubCard(){-->
+    // <!--//			var class_name = $('#upload tr td input[name="class_name"]').val();-->
+    // <!--//			var class_type = $('#upload tr td select[name="class_type"] option:selected').val();-->
+    // <!--//			var price = $('#upload tr td input[name="price"]').val();-->
+    // <!--//			var remark = $('#upload tr td textarea[name="remark"]').val();-->
+    // <!--//			$.ajax({-->
+    // <!--//				url:baseUrl+"/whimsy/card_class/add",-->
+    // <!--//				context: document.body,-->
+    // <!--//				dataType: "JSON",-->
+    // <!--//				data:$("#upload").serialize(),-->
+    // <!--//				async: false,-->
+    // <!--//				success:function (dataJson,dataStatus) {-->
+    // <!--//					if ("success" != dataJson.ret_code){-->
+    // <!--//						alert(dataJson.ret_msg);-->
+    // <!--//					}else {-->
+    // <!--//						console.log(dataJson);-->
+    // <!--//					}-->
+    // <!--//				},-->
+    // <!--//				error:function (req, errorMsg, exception) {-->
+    // <!--//					alert(errorMsg);-->
+    // <!--//				}-->
+    // <!--//			});-->
+    // <!--//		}-->
+    function addClubCard() {
+        var trans_type = $("#trans_type option:selected").val();
+        var integral_type = $("#integral_type option:selected").val();
+        var integral_desc = $("#integral_desc").val();
+        var integral_rule;
+
+        var data = {
+            "trans_type": trans_type,
+            "integral_type": integral_type,
+            "integral_desc": integral_desc,
+            "integral_rule;": integral_rule
+        };
+        /*获取积分规则integral_rule*/
+        if (integral_type == "00") {
+            data.integral_rule = {
+                percent: $('.score-one').val()
+            };
+        } else {
+            data.integral_rule = [];
+            $('#shuju tbody tr').each(function (i, ele, arr) {
+                data.integral_rule.push({
+                    s_amt: $(ele).find('.start').val,
+                    e_amt: $(ele).find('.end').val,
+                    percent: $(ele).find('.score').val
+                })
+            });
+        }
+        /* $.ajax({
+             url: baseUrl + "/whimsy/integral_role/add",
+             type: 'POST',
+             data: {"data": JSON.stringify(data)},
+             async: false,
+             cache: false,
+             contentType: false,
+             processData: false,
+             success: function (dataJson, dataStatus) {
+                 if ("success" != dataJson.ret_code) {
+                     alert(dataJson.ret_msg);
+                 } else {
+                     console.log(dataJson);
+                     alert(dataJson.ret_msg);
+                 }
+             },
+             error: function (req, errorMsg, exception) {
+                 alert(errorMsg);
+             }
+         });*/
+    }
+
+</script>
+</body>
+</html>

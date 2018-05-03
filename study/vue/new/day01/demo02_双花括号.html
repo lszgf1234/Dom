@@ -11,6 +11,10 @@
     <h1>{{car.brand}}</h1>
     <!-- 在双花括号中 执行运算表达式-->
     <p>{{3+5}}</p>
+    <div v-for="t in test">
+        <a href="javascript:void(0)" @click="add(t, t.a)">{{t.a}}</a>
+    </div>
+
     <!--<h2>{{console.log('it is a test')}}</h2>-->
 </div>
 <script>
@@ -20,6 +24,25 @@
             car:{
                 brand:'Volvo',
                 price:30
+            },
+            test: [{
+                a: 1,
+                b: false
+            },{
+                a: 2,
+                b: true
+            },{
+                a: 3,
+                b: false
+
+            }]
+        },
+        methods: {
+            add: function (t, a) {
+                // alert()
+                // a++;
+                t.a++
+                // a++
             }
         }
     })
