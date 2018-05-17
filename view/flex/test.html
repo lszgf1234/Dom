@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*.test {
+            display: flex;
+        }*/
+        .item2 {
+           /* order: -1;
+            margin: -30px;*/
+            float: left;
+        }
+        .item1, .item2{
+            width: 300px;
+        }
+        .item1{
+            float: right;
+        }
+
+        @media (max-width: 768px) {
+            .item1, .item2{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="test">
+    <p class="item1">flex item1</p>
+    <p class="item2">flex item2</p>
+</div>
+</body>
+</html>

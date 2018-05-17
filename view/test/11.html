@@ -8,17 +8,24 @@
     </style>
 </head>
 <body>
-<div class="a">bbbbbb</div>
-<div class="cli"></div>
+<form action="">
+
+    <input type="checkbox" value="1" name="11" checked>
+    <input type="checkbox" value="2" name="11">
+</form>
+<script src="/Dom/js/jquery-1.11.3.js"></script>
 
 <!--<img src="/Dom/img/liveing.gif" alt="">-->
 <script>
-    document.querySelector('.a').onclick = function () {
-        alert();
-    };
-    var ele = document.createElement('div');
-    ele.innerHTML = 'bbbbbb';
-    document.querySelector('.cli').innerHTML = '<button class="a">aaaa</button>';
+
+
+
+    $('form input').each(function (i, ele) {
+        if(ele.checked){
+            var value = $(ele).val();
+            // todo:放到你的json中去
+        }
+    })
 </script>
 </body>
 </html>
